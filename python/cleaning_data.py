@@ -1,7 +1,4 @@
-import csv, json
-with open('baseball_data.csv') as csvfile:
-	reader = csv.DictReader(csvfile)
-	info = [row for row in reader]
-
-from pprint import pprint
-pprint(info)
+from pandas import DataFrame, read_csv
+df = read_csv('baseball_data.csv')
+df = df[df.avg > 0.0]
+print df
