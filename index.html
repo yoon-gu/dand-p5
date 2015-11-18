@@ -8,17 +8,19 @@
 <div id="chartContainer"></div>
 <script type="text/javascript">
   var svg = dimple.newSvg("#chartContainer", 590, 400);
-    // d3.tsv("data/example_data.tsv", function (data) {
-    d3.csv("/data/cleand_baseball.csv", function (data) {
+    d3.csv("/data/cleaned_baseball.csv", function (data) {
       // Create the chart
       var myChart = new dimple.chart(svg, data);
       myChart.setBounds(60, 30, 420, 330)
 
       // Create a standard bubble of SKUs by Price and Sales Value
       // We are coloring by Owner as that will be the key in the legend
-      myChart.addMeasureAxis("x", "avg");
-      myChart.addMeasureAxis("y", "HR");
-      myChart.addSeries(["name", "handedness"], dimple.plot.bar);
+      myChart.addCategoryAxis("x", "avg_category");
+      myChart.addMeasureAxis("y", "avg");
+      myChart.addMeasureAxis("p", "HR");
+      myChart.addMeasureAxis("z", "height");
+      var pies = myChart.addSeries(["handedness"], dimple.plot.pie);
+      pies.radius = 20;
       var myLegend = myChart.addLegend(530, 100, 60, 300, "Right");
       myChart.draw();
       

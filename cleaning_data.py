@@ -12,3 +12,5 @@ print df.groupby(by='handedness').describe()
 import numpy as np
 df['avg_category'] = cut(df.avg, np.linspace(0.0, 0.35, 8))
 print df
+
+df.to_csv('data/cleaned_baseball.csv')
