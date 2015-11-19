@@ -16,7 +16,7 @@
       // Create a standard bubble of SKUs by Price and Sales Value
       // We are coloring by Owner as that will be the key in the legend
       myChart.addCategoryAxis("x", ["avg_category", "handedness"]);
-      myChart.addMeasureAxis("y", "HR");
+      myChart.addMeasureAxis("y", "HR_ratio");
       // myChart.addMeasureAxis("p", "HR");
       // myChart.addMeasureAxis("z", "height");
       myChart.addSeries(["handedness"], dimple.plot.bar);
