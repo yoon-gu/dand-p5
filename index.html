@@ -12,10 +12,10 @@
       // Create the chart
       var myChart = new dimple.chart(svg, data);
       myChart.setBounds(60, 30, 510, 330);
-
       // Create a standard bubble of SKUs by Price and Sales Value
       // We are coloring by Owner as that will be the key in the legend
-      myChart.addCategoryAxis("x", ["avg_category", "handedness"]);
+      var x = myChart.addCategoryAxis("x", ["avg_category", "handedness"]);
+      x.addOrderRule(["[0.1, 0.15)", "[0.15, 0.2)", "[0.2, 0.25)", "[0.25, 0.3)", "[0.3, 0.35)"]);
       myChart.addMeasureAxis("y", "HR_ratio");
       // myChart.addMeasureAxis("p", "HR");
       // myChart.addMeasureAxis("z", "height");
