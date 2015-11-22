@@ -77,6 +77,8 @@ For unbalanced population, I needed to normalize values. So I added `HR_ratio` t
 |  [0.3, 0.35)  |         L  |  660 |  1014            | 0.650888 |
 |  [0.3, 0.35)  |         R  |  194 |  1014            | 0.191321 |
 
-Here is my initial visualization graph.
+### Data Visualization using dimple.js ###
+Here is my initial visualization graph. I chose `avg_category` for x-axis, and `HR_ratio` for y-axis. And I have 3 groups visualization, such as `R`, `L`,  and `B`
 ![Initial Graph](initial.png)
 
+### Feedbacks ###
