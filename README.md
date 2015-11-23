@@ -83,6 +83,13 @@ For unbalanced population, I needed to normalize values. So I added `HR_ratio` t
 
 ### Data Visualization using dimple.js ###
 Here is my initial visualization graph. I chose `avg_category` for x-axis, and `HR_ratio` for y-axis. And I have 3 groups visualization, such as `R`, `L`,  and `B`
+
+* I chose `avg_category` as categorical variable, so I can simplify the visualization helping views recognize their performance. Expressing `avg` as 5-graded levels is better than a value.
+* Bar chart is simple and powerful tool to compare a certain quantity. All we have to do is just looking around target bar plot. It could be easily figured out that which one is higer value.
+* For people who want to know the exact value of `HR_ratio`, I used dimple.js to get hovering/tooltip function.
+* I used different colors for `handedness`, because I want to verify the ratio of handedness. Coloring is very effective way to show different groups data.
+
+
 ![Initial Graph](initial.png)
 
 ### Feedbacks ###
