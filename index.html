@@ -5,25 +5,35 @@
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
 </head>
-<h2>HR average / ratio by handedness</h2>
-<div id="chartContainer"></div>
-<script type="text/javascript">
-  var svg = dimple.newSvg("#chartContainer", 590, 400);
-    d3.csv("/data/cleaned_baseball.csv", function (data) {
-      var myChart = new dimple.chart(svg, data);
-      myChart.setBounds(60, 30, 510, 330);
-      var x = myChart.addCategoryAxis("x", ["avg_category"]);
-      x.addOrderRule(["[0.1, 0.15)", "[0.15, 0.2)", "[0.2, 0.25)", "[0.25, 0.3)", "[0.3, 0.35)"]);
-      x.title = "Batting Average Grade";
-      var y = myChart.addMeasureAxis("y", "mean_HR");
-      myChart.addMeasureAxis("p", "HR_Percent");
-      myChart.addMeasureAxis("z", "HR_Percent");
-      y.title = "HR average";
-      var pies = myChart.addSeries(["handedness"], dimple.plot.pie);
-      pies.innerRadius = 10;
-      pies.outerRadius = 25;
-      myChart.addLegend(65, 10, 510, 20, "right");
-      myChart.draw();
-    });
-</script>
+<body>
+  <h2>HR average / ratio by handedness</h2>
+  <div id="chartContainer"></div>
+  <script type="text/javascript">
+    var svg = dimple.newSvg("#chartContainer", 590, 400);
+      d3.csv("/data/cleaned_baseball.csv", function (data) {
+        // chart creation
+        var myChart = new dimple.chart(svg, data);
+        myChart.setBounds(60, 30, 510, 330);
+        // add x-axis
+        var x = myChart.addCategoryAxis("x", ["avg_category"]);
+        // ordering for x-axis because it is an ordered categorical variable.
+        x.addOrderRule(["[0.1, 0.15)", "[0.15, 0.2)", "[0.2, 0.25)", "[0.25, 0.3)", "[0.3, 0.35)"]);
+        // x-axis label
+        x.title = "Batting Average Grade";
+        // y-axis : mean of HRs
+        var y = myChart.addMeasureAxis("y", "mean_HR");
+        // y-axis label
+        y.title = "HR average";
+        // portion 
+        myChart.addMeasureAxis("p", "HR_Percent");
+        var pies = myChart.addSeries(["handedness"], dimple.plot.pie);
+        pies.innerRadius = 10;
+        pies.outerRadius = 25;
+        // legend
+        myChart.addLegend(65, 10, 510, 20, "right");
+        // draw!
+        myChart.draw();
+      });
+  </script>
+</body>
 </html>
