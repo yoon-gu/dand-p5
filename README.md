@@ -82,6 +82,8 @@ Here is my initial visualization graph. I chose `avg_category` for x-axis, and `
 ![Initial Graph](initial.png)
 
 ### Feedbacks ###
+I shared my initial plot with my friends. I showed it to a friend in person. Also, I shared my webserver link to others.
+
 #### Interview 1 ####
 > Your graph on the baseball record is interesting. But when I saw for the first time, I did not recognize at a glance what a graph is about. Perhaps, x-axis and y-axis label name seems to be important. In addition, if the short title could show about the contents of the graph, it would be great.
 
@@ -94,5 +96,19 @@ Here is my initial visualization graph. I chose `avg_category` for x-axis, and `
 ### Post-feedback Design ###
 I made the follwing changes as reaction to feedbacks from my firends.
 
-* 1
-* 2
+* I added short title to convey my discovery from this baseball dataset. `x` and `y` axes' labels are also included properly.
+* Also, I changed my plot to pie plot to show the home run ratio among `handedness`.
+* From baseball dataset, I computed mean of homerun for each group, and set that variable to `y`-axis.
+
+![Final Graph](final.png)
+
+From this graph, the fact that the higher battiang average, the more player's HRs. In addition, left-handed players are especially noticed among top players(high batting average).
+
+## Resources ##
+* http://dimplejs.org
+* http://pandas.pydata.org
+* http://jupyter.org
+
+## Data ##
+* `data/baseball_data.csv` : the original dataset
+* `data/cleaned_baseball.csv` : grouped and merged dataset by me.
