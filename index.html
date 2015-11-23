@@ -12,12 +12,14 @@
     d3.csv("/data/cleaned_baseball.csv", function (data) {
       var myChart = new dimple.chart(svg, data);
       myChart.setBounds(60, 30, 510, 330);
-      var x = myChart.addCategoryAxis("x", ["avg_category", "handedness"]);
+      var x = myChart.addCategoryAxis("x", ["avg_category"]);
       x.addOrderRule(["[0.1, 0.15)", "[0.15, 0.2)", "[0.2, 0.25)", "[0.25, 0.3)", "[0.3, 0.35)"]);
       x.title = "Batting Average Grade";
       var y = myChart.addMeasureAxis("y", "HR_Percent");
-      y.title = "HR average(%)";
-      myChart.addSeries(["handedness"], dimple.plot.bar);
+      myChart.addMeasureAxis("p", "HR_Percent");
+      myChart.addMeasureAxis("z", "HR_Percent");
+      y.title = "HR average";
+      myChart.addSeries(["handedness"], dimple.plot.pie);
       myChart.addLegend(65, 10, 510, 20, "right");
       myChart.draw();
     });
