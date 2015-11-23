@@ -13,6 +13,7 @@ avg_partical_count  = df.drop(['height', 'weight', 'name', 'avg', 'handedness'],
 avg_count_df = avg_partical_count.add_prefix('total_').reset_index()
 final_df = avg_handedness_count_df.merge(avg_count_df, on='avg_category')
 final_df['HR_Percent'] = final_df.HR / final_df.total_HR * 100.
-print final_df
 
+mean_hr_group = df.drop(['height', 'weight', 'avg'], axis=1).groupby(by=['avg_category', 'handedness']).mean().add_prefix('mean_').reset_index()
+final_df = final_df.merge(mean_hr_group, on=['avg_category', 'handedness'])
 final_df.to_csv('data/cleaned_baseball.csv')
