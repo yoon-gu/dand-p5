@@ -6,6 +6,10 @@ by Yoon-gu Hwang, November 22, 2015
 This dataset about information of baseball players. 
 It includes player's name, handedness (right, left handed, or both), height, weight, batting average, and the number of home runs.
 
+I noticed that there was a relation between batting average, `avg` and home runs, `HR`.
+Players with better `avg` tends to hit more home runs than lower `avg` players.
+In addition, I heard that many great hitters were left-handed. In my visualization, it turns out that there is pretty high home run ratio of left-handed among top batting average players.
+
 ## Design ##
 ### Exploratory Data Analysis using Python ###
 I downloaded `baseball_data.csv` the dataset from data set options page given by Udacity. The dataset had player's physical information(`name`, `height`, `weight`) and performance information(`avg`, `HR`).
@@ -102,7 +106,7 @@ I made the follwing changes as reaction to feedbacks from my firends.
 
 ![Final Graph](final.png)
 
-From this graph, the fact that the higher battiang average, the more player's HRs. In addition, left-handed players are especially noticed among top players(high batting average).
+From this graph, the fact that the higher batting average, the more player's HRs. In addition, left-handed players are especially noticed among top players(high batting average).
 
 ## Resources ##
 * http://dimplejs.org
