@@ -90,7 +90,7 @@ Here is my initial visualization graph. I chose `avg_category` for x-axis, and `
 * I used different colors for `handedness`, because I want to verify the ratio of handedness. Coloring is very effective way to show different groups data.
 
 
-![Initial Graph](initial.png)
+![Initial Graph](https://github.com/yoon-gu/dand-p5/blob/master/initial.png)
 
 ### Feedbacks ###
 I shared my initial plot with my friends. I showed it to a friend in person. Also, I shared my webserver link to others.
@@ -111,7 +111,7 @@ I made the follwing changes as reaction to feedbacks from my firends.
 * Also, I changed my plot to pie plot to show the home run ratio among `handedness`.
 * From baseball dataset, I computed mean of homerun for each group, and set that variable to `y`-axis.
 
-![Final Graph](final.png)
+![Final Graph](https://github.com/yoon-gu/dand-p5/blob/master/final.png)
 
 From this graph, the fact that the higher batting average, the more player's HRs. In addition, left-handed players are especially noticed among top players(high batting average).
 
