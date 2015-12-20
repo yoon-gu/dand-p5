@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Baseball DataVisualization using Dimple / D3 by yoon-gu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Baseball DataVisualization using Dimple / D3</h1>
+      <h2 class="project-tagline">Data Visualization</h2>
+      <a href="https://github.com/yoon-gu/dand-p5" class="btn">View on GitHub</a>
+      <a href="https://github.com/yoon-gu/dand-p5/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/yoon-gu/dand-p5/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="data-visualization-baseball-data" class="anchor" href="#data-visualization-baseball-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Visualization: Baseball Data</h1>
+
+<p>by Yoon-gu Hwang, November 22, 2015</p>
+
+<h2>
+<a id="summary" class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary</h2>
+
+<p>This dataset about information of baseball players. 
+It includes player's name, handedness (right, left handed, or both), height, weight, batting average, and the number of home runs.</p>
+
+<p>I noticed that there was a relation between batting average, <code>avg</code> and home runs, <code>HR</code>.
+Players with better <code>avg</code> tends to hit more home runs than lower <code>avg</code> players.
+In addition, I heard that many great hitters were left-handed. In my visualization, it turns out that there is pretty high home run ratio of left-handed among top batting average players.</p>
+
+<h2>
+<a id="design" class="anchor" href="#design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design</h2>
+
+<h3>
+<a id="exploratory-data-analysis-using-python" class="anchor" href="#exploratory-data-analysis-using-python" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exploratory Data Analysis using Python</h3>
+
+<p>I downloaded <code>baseball_data.csv</code> the dataset from data set options page given by Udacity. The dataset had player's physical information(<code>name</code>, <code>height</code>, <code>weight</code>) and performance information(<code>avg</code>, <code>HR</code>).</p>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">height</th>
+<th align="right">weight</th>
+<th align="right">avg</th>
+<th align="right">HR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">count</td>
+<td align="right">1157.000000</td>
+<td align="right">1157.000000</td>
+<td align="right">1157.000000</td>
+<td align="right">1157.000000</td>
+</tr>
+<tr>
+<td align="right">mean</td>
+<td align="right">72.756266</td>
+<td align="right">184.513397</td>
+<td align="right">0.186793</td>
+<td align="right">45.359551</td>
+</tr>
+<tr>
+<td align="right">std</td>
+<td align="right">2.142272</td>
+<td align="right">15.445995</td>
+<td align="right">0.106175</td>
+<td align="right">74.065110</td>
+</tr>
+<tr>
+<td align="right">min</td>
+<td align="right">65.000000</td>
+<td align="right">140.000000</td>
+<td align="right">0.000000</td>
+<td align="right">0.000000</td>
+</tr>
+<tr>
+<td align="right">25%</td>
+<td align="right">71.000000</td>
+<td align="right">175.000000</td>
+<td align="right">0.138000</td>
+<td align="right">1.000000</td>
+</tr>
+<tr>
+<td align="right">50%</td>
+<td align="right">73.000000</td>
+<td align="right">185.000000</td>
+<td align="right">0.238000</td>
+<td align="right">15.000000</td>
+</tr>
+<tr>
+<td align="right">75%</td>
+<td align="right">74.000000</td>
+<td align="right">195.000000</td>
+<td align="right">0.258000</td>
+<td align="right">55.000000</td>
+</tr>
+<tr>
+<td align="right">max</td>
+<td align="right">80.000000</td>
+<td align="right">245.000000</td>
+<td align="right">0.328000</td>
+<td align="right">563.000000</td>
+</tr>
+</tbody>
+</table>
+
+<p>There are 1157 players' records. Interestingly, some players have zero batting average or home runs, so I removed those rows.</p>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">height</th>
+<th align="right">weight</th>
+<th align="right">avg</th>
+<th align="right">HR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">count</td>
+<td align="right">871.000000</td>
+<td align="right">871.000000</td>
+<td align="right">871.000000</td>
+<td align="right">871.000000</td>
+</tr>
+<tr>
+<td align="right">mean</td>
+<td align="right">72.338691</td>
+<td align="right">182.846154</td>
+<td align="right">0.244201</td>
+<td align="right">60.253731</td>
+</tr>
+<tr>
+<td align="right">std</td>
+<td align="right">1.935478</td>
+<td align="right">14.971904</td>
+<td align="right">0.030703</td>
+<td align="right">79.940631</td>
+</tr>
+<tr>
+<td align="right">min</td>
+<td align="right">65.000000</td>
+<td align="right">140.000000</td>
+<td align="right">0.104000</td>
+<td align="right">1.000000</td>
+</tr>
+<tr>
+<td align="right">25%</td>
+<td align="right">71.000000</td>
+<td align="right">170.000000</td>
+<td align="right">0.232000</td>
+<td align="right">11.000000</td>
+</tr>
+<tr>
+<td align="right">50%</td>
+<td align="right">72.000000</td>
+<td align="right">180.000000</td>
+<td align="right">0.248000</td>
+<td align="right">27.000000</td>
+</tr>
+<tr>
+<td align="right">75%</td>
+<td align="right">74.000000</td>
+<td align="right">193.000000</td>
+<td align="right">0.263000</td>
+<td align="right">78.000000</td>
+</tr>
+<tr>
+<td align="right">max</td>
+<td align="right">80.000000</td>
+<td align="right">230.000000</td>
+<td align="right">0.328000</td>
+<td align="right">563.000000</td>
+</tr>
+</tbody>
+</table>
+
+<p>After cleaning meaningless rows, I had 871 records. Now I wanted to figure out player's performance with different handedness and avg_category. I showed histogram, HR vs. avg_category with 3 types of handedness. 
+I used <code>pandas.cut</code> to split <code>avg</code> to 5 grades from 0.1 to 0.35.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">avg_category</th>
+<th align="center">handedness</th>
+<th align="right">HR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">[0.1, 0.15)</td>
+<td align="center">B</td>
+<td align="right">9</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">L</td>
+<td align="right">11</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">R</td>
+<td align="right">41</td>
+</tr>
+<tr>
+<td align="center">[0.15, 0.2)</td>
+<td align="center">B</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">L</td>
+<td align="right">32</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">R</td>
+<td align="right">279</td>
+</tr>
+<tr>
+<td align="center">[0.2, 0.25)</td>
+<td align="center">B</td>
+<td align="right">904</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">L</td>
+<td align="right">4449</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">R</td>
+<td align="right">9020</td>
+</tr>
+<tr>
+<td align="center">[0.25, 0.3)</td>
+<td align="center">B</td>
+<td align="right">2268</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">L</td>
+<td align="right">12591</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">R</td>
+<td align="right">21861</td>
+</tr>
+<tr>
+<td align="center">[0.3, 0.35)</td>
+<td align="center">B</td>
+<td align="right">160</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">L</td>
+<td align="right">660</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">R</td>
+<td align="right">194</td>
+</tr>
+</tbody>
+</table>
+
+<p>For unbalanced population, I needed to normalize values. So I added <code>HR_ratio</code> that is divided by subtotal <code>HR</code> sum for each handedness group.</p>
+
+<table>
+<thead>
+<tr>
+<th align="right">avg_category</th>
+<th align="center">handedness</th>
+<th align="right">HR</th>
+<th align="right">HR_partial sum</th>
+<th align="center">HR_ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">[0.1, 0.15)</td>
+<td align="center">B</td>
+<td align="right">9</td>
+<td align="right">61</td>
+<td align="center">0.147541</td>
+</tr>
+<tr>
+<td align="right">[0.1, 0.15)</td>
+<td align="center">L</td>
+<td align="right">11</td>
+<td align="right">61</td>
+<td align="center">0.180328</td>
+</tr>
+<tr>
+<td align="right">[0.1, 0.15)</td>
+<td align="center">R</td>
+<td align="right">41</td>
+<td align="right">61</td>
+<td align="center">0.672131</td>
+</tr>
+<tr>
+<td align="right">[0.15, 0.2)</td>
+<td align="center">B</td>
+<td align="right">2</td>
+<td align="right">313</td>
+<td align="center">0.006390</td>
+</tr>
+<tr>
+<td align="right">[0.15, 0.2)</td>
+<td align="center">L</td>
+<td align="right">32</td>
+<td align="right">313</td>
+<td align="center">0.102236</td>
+</tr>
+<tr>
+<td align="right">[0.15, 0.2)</td>
+<td align="center">R</td>
+<td align="right">279</td>
+<td align="right">313</td>
+<td align="center">0.891374</td>
+</tr>
+<tr>
+<td align="right">[0.2, 0.25)</td>
+<td align="center">B</td>
+<td align="right">904</td>
+<td align="right">14373</td>
+<td align="center">0.062896</td>
+</tr>
+<tr>
+<td align="right">[0.2, 0.25)</td>
+<td align="center">L</td>
+<td align="right">4449</td>
+<td align="right">14373</td>
+<td align="center">0.309539</td>
+</tr>
+<tr>
+<td align="right">[0.2, 0.25)</td>
+<td align="center">R</td>
+<td align="right">9020</td>
+<td align="right">14373</td>
+<td align="center">0.627566</td>
+</tr>
+<tr>
+<td align="right">[0.25, 0.3)</td>
+<td align="center">B</td>
+<td align="right">2268</td>
+<td align="right">36720</td>
+<td align="center">0.061765</td>
+</tr>
+<tr>
+<td align="right">[0.25, 0.3)</td>
+<td align="center">L</td>
+<td align="right">12591</td>
+<td align="right">36720</td>
+<td align="center">0.342892</td>
+</tr>
+<tr>
+<td align="right">[0.25, 0.3)</td>
+<td align="center">R</td>
+<td align="right">21861</td>
+<td align="right">36720</td>
+<td align="center">0.595343</td>
+</tr>
+<tr>
+<td align="right">[0.3, 0.35)</td>
+<td align="center">B</td>
+<td align="right">160</td>
+<td align="right">1014</td>
+<td align="center">0.157791</td>
+</tr>
+<tr>
+<td align="right">[0.3, 0.35)</td>
+<td align="center">L</td>
+<td align="right">660</td>
+<td align="right">1014</td>
+<td align="center">0.650888</td>
+</tr>
+<tr>
+<td align="right">[0.3, 0.35)</td>
+<td align="center">R</td>
+<td align="right">194</td>
+<td align="right">1014</td>
+<td align="center">0.191321</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="data-visualization-using-dimplejs" class="anchor" href="#data-visualization-using-dimplejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Visualization using dimple.js</h3>
+
+<p>Here is my initial visualization graph. I chose <code>avg_category</code> for x-axis, and <code>HR_ratio</code> for y-axis. And I have 3 groups visualization, such as <code>R</code>, <code>L</code>,  and <code>B</code></p>
+
+<ul>
+<li>I chose <code>avg_category</code> as categorical variable, so I can simplify the visualization helping views recognize their performance. Expressing <code>avg</code> as 5-graded levels is better than a value.</li>
+<li>Bar chart is simple and powerful tool to compare a certain quantity. All we have to do is just looking around target bar plot. It could be easily figured out that which one is higer value.</li>
+<li>For people who want to know the exact value of <code>HR_ratio</code>, I used dimple.js to get hovering/tooltip function.</li>
+<li>I used different colors for <code>handedness</code>, because I want to verify the ratio of handedness. Coloring is very effective way to show different groups data.</li>
+</ul>
+
+<p><img src="initial.png" alt="Initial Graph"></p>
+
+<h3>
+<a id="feedbacks" class="anchor" href="#feedbacks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feedbacks</h3>
+
+<p>I shared my initial plot with my friends. I showed it to a friend in person. Also, I shared my webserver link to others.</p>
+
+<h4>
+<a id="interview-1" class="anchor" href="#interview-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interview 1</h4>
+
+<blockquote>
+<p>Your graph on the baseball record is interesting. But when I saw for the first time, I did not recognize at a glance what a graph is about. Perhaps, x-axis and y-axis label name seems to be important. In addition, if the short title could show about the contents of the graph, it would be great.</p>
+</blockquote>
+
+<h4>
+<a id="interview-2" class="anchor" href="#interview-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interview 2</h4>
+
+<blockquote>
+<p>I recommend a pie chart showing the hit ratio. The pie chart is a very effective way to show the occupation state for some quantity.</p>
+</blockquote>
+
+<h4>
+<a id="interview-3" class="anchor" href="#interview-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interview 3</h4>
+
+<blockquote>
+<p>The home run ratio with the handedness is impressive. I'm wondering one morething when I look this graph. The average number of home runs will be good index for figuring out difference between 3 handedness groups.</p>
+</blockquote>
+
+<h3>
+<a id="post-feedback-design" class="anchor" href="#post-feedback-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Post-feedback Design</h3>
+
+<p>I made the follwing changes as reaction to feedbacks from my firends.</p>
+
+<ul>
+<li>I added short title to convey my discovery from this baseball dataset. <code>x</code> and <code>y</code> axes' labels are also included properly.</li>
+<li>Also, I changed my plot to pie plot to show the home run ratio among <code>handedness</code>.</li>
+<li>From baseball dataset, I computed mean of homerun for each group, and set that variable to <code>y</code>-axis.</li>
+</ul>
+
+<p><img src="final.png" alt="Final Graph"></p>
+
+<p>From this graph, the fact that the higher batting average, the more player's HRs. In addition, left-handed players are especially noticed among top players(high batting average).</p>
+
+<h2>
+<a id="resources" class="anchor" href="#resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resources</h2>
+
+<ul>
+<li><a href="http://dimplejs.org">http://dimplejs.org</a></li>
+<li><a href="http://pandas.pydata.org">http://pandas.pydata.org</a></li>
+<li><a href="http://jupyter.org">http://jupyter.org</a></li>
+</ul>
+
+<h2>
+<a id="data" class="anchor" href="#data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data</h2>
+
+<ul>
+<li>
+<code>data/baseball_data.csv</code> : the original dataset</li>
+<li>
+<code>data/cleaned_baseball.csv</code> : grouped and merged dataset by me.</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/yoon-gu/dand-p5">Baseball DataVisualization using Dimple / D3</a> is maintained by <a href="https://github.com/yoon-gu">yoon-gu</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
